@@ -1,0 +1,30 @@
+cabal-version: 3.0
+name: anonize
+version: 0.1.0.0
+synopsis: Utilities for making anonymous data
+-- description:
+-- bug-reports:
+homepage: https://github.com/layer-3-communications/anonize
+bug-reports: https://github.com/layer-3-communications/anonize/issues
+license: BSD-3-Clause
+license-file: LICENSE
+author: Eric Demko
+maintainer: edemko@layer3com.com
+copyright: 2020 Eric Demko
+-- category: 
+build-type: Simple
+extra-source-files: CHANGELOG.md
+
+library
+  exposed-modules:
+    , Text.Anonize.Animals
+    , Text.Anonize.Humans
+  -- other-modules:
+  -- other-extensions:
+  build-depends:
+    , base >=4.13 && <5
+    , primitive-checked >=0.7
+    , primitive-unlifted >=0.1.2
+  hs-source-dirs: src
+  default-language: Haskell2010
+  ghc-options: -Wall -O2
