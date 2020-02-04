@@ -1,20 +1,17 @@
 {-# language BangPatterns #-}
-{-# language TypeApplications #-}
+{-# language OverloadedStrings #-}
 
 module Text.Anonize.Humans
   ( indexHuman
   , numHumans
   ) where
 
-import Data.Primitive (ByteArray)
-import Data.Primitive.Unlifted.Array (UnliftedArray,indexUnliftedArray)
 import Data.Primitive.Unlifted.Array (sizeofUnliftedArray)
-import Control.Applicative (liftA2)
-import Data.Word (Word8)
-import Data.Char (ord)
+import Data.Primitive.Unlifted.Array (UnliftedArray,indexUnliftedArray)
+import Data.Text.Short (ShortText)
 import qualified GHC.Exts as Exts
 
-indexHuman :: Int -> ByteArray
+indexHuman :: Int -> ShortText
 indexHuman !ix = if ix < numHumans
   then indexUnliftedArray humans ix
   else error "indexHuman: index too big"
@@ -23,11 +20,10 @@ indexHuman !ix = if ix < numHumans
 numHumans :: Int
 numHumans = sizeofUnliftedArray humans
 
-humans :: UnliftedArray ByteArray
-humans = Exts.fromList
-  (map (\x -> Exts.fromList (map (fromIntegral @Int @Word8 . ord) x)) names)
+humans :: UnliftedArray ShortText
+humans = Exts.fromList names
 
-names :: [String]
+names :: [ShortText]
 names =
   [ "john"
   , "william"

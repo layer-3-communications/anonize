@@ -1,20 +1,17 @@
 {-# language BangPatterns #-}
-{-# language TypeApplications #-}
+{-# language OverloadedStrings #-}
 
 module Text.Anonize.Animals
   ( indexAnimal
   , numAnimals
   ) where
 
-import Data.Primitive (ByteArray)
-import Data.Primitive.Unlifted.Array (UnliftedArray,indexUnliftedArray)
 import Data.Primitive.Unlifted.Array (sizeofUnliftedArray)
-import Control.Applicative (liftA2)
-import Data.Word (Word8)
-import Data.Char (ord)
+import Data.Primitive.Unlifted.Array (UnliftedArray,indexUnliftedArray)
+import Data.Text.Short (ShortText)
 import qualified GHC.Exts as Exts
 
-indexAnimal :: Int -> ByteArray
+indexAnimal :: Int -> ShortText
 indexAnimal !ix = if ix < numAnimals
   then indexUnliftedArray animals ix
   else error "indexAnimal: index too big"
@@ -23,12 +20,11 @@ indexAnimal !ix = if ix < numAnimals
 numAnimals :: Int
 numAnimals = sizeofUnliftedArray animals
 
-animals :: UnliftedArray ByteArray
-animals = Exts.fromList
-  (map (\x -> Exts.fromList (map (fromIntegral @Int @Word8 . ord) x)) names)
+animals :: UnliftedArray ShortText
+animals = Exts.fromList names
 
-names :: [String]
-names = liftA2 (++) ["Allow-","Deny-"] 
+names :: [ShortText]
+names =
   [ "Aardvark"
   , "Aardwolf"
   , "Aba"
