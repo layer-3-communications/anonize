@@ -16,7 +16,7 @@ indexHuman !ix = if ix < numHumans
   then indexUnliftedArray humans ix
   else error "indexHuman: index too big"
 
--- as of 2020-02-04, equals 2000
+-- as of 2020-02-04, equals 1997
 numHumans :: Int
 numHumans = sizeofUnliftedArray humans
 
@@ -467,7 +467,6 @@ names =
   , "sterling"
   , "steven"
   , "axel"
-  , "d"
   , "bryant"
   , "clement"
   , "erwin"
@@ -527,7 +526,6 @@ names =
   , "reginald"
   , "rubin"
   , "seymour"
-  , "wm"
   , "young"
   , "benjamine"
   , "carey"
@@ -933,7 +931,6 @@ names =
   , "willian"
   , "yee"
   , "zeke"
-  , "ab"
   , "abbott"
   , "agustus"
   , "albertus"
